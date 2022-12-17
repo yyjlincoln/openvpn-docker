@@ -14,9 +14,9 @@ RUN autoreconf -i -v -f
 RUN ./configure
 RUN make
 RUN make install
+COPY submodules/easy-rsa/easyrsa3 /install/
 # # Tests
 # RUN make check
-ENV PATH=$PATH:/install/submodules/easy-rsa/easyrsa3
-RUN easyrsa init-pki
-RUN easyrsa build-ca
-CMD bash
+ENV PATH=$PATH:/install
+COPY ./scripts /install/scripts
+CMD scripts/enable-tun.sh && bash
