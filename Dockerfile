@@ -16,3 +16,7 @@ RUN make
 RUN make install
 # # Tests
 # RUN make check
+ENV PATH=$PATH:/install/submodules/easy-rsa/easyrsa3
+RUN easyrsa init-pki
+RUN easyrsa build-ca
+CMD bash
